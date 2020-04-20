@@ -37,7 +37,6 @@ load_state(net, checkpoint)
 net = net.eval()
 if not args.cpu:
     net = net.cuda()
-net = net.cuda()
 
 def infer_fast(net, img, net_input_height_size, stride, upsample_ratio, cpu,
                pad_value=(0, 0, 0), img_mean=(128, 128, 128), img_scale=1/256):
@@ -155,8 +154,8 @@ def main():
     processes = dict()
     
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    #sock.bind(("0.0.0.0",9000))
-    sock.bind(("127.0.0.1",9000))
+    sock.bind(("0.0.0.0", 50))
+    #sock.bind(("127.0.0.1",9000))
     sock.listen()
     watchdog = threading.Thread(target=watchDog, args=(processes,))
     watchdog.start()
